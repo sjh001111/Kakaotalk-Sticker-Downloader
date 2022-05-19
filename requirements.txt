@@ -1,2 +1,4 @@
-requests
 discord.py
+requests
+selenium
+webdriver-manager
