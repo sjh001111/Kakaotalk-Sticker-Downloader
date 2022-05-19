@@ -25,6 +25,19 @@ def webp2gif(filename, eid, idx):
 
 
 def emoticon_gif(url):
+    from selenium import webdriver
+    from webdriver_manager.chrome import ChromeDriverManager
+    from selenium.webdriver.common.keys import Keys
+    from selenium.webdriver.common.by import By
+    from selenium.webdriver.support.ui import WebDriverWait
+    from selenium.webdriver.support import expected_conditions as EC
+
+    global driver
+    options = webdriver.ChromeOptions()
+    options.add_argument("headless")
+    options.add_experimental_option("prefs", {"download.default_directory": os.getcwd()})
+    driver = webdriver.Chrome(ChromeDriverManager().install(),options=options)
+    
     eid, ename = util.getEmoticonInfo(url)
     print("EmoticonId: {}\nEmoticonName: {}".format(eid, ename))
 
@@ -54,27 +67,14 @@ def emoticon_gif(url):
             with open(filename, "wb") as f:
                 f.write(emot)
                 
-            print("success {}/{} WEBP".format(idx+1, len(namelist)))
-
-            from selenium import webdriver
-            from webdriver_manager.chrome import ChromeDriverManager
-            from selenium.webdriver.common.keys import Keys
-            from selenium.webdriver.common.by import By
-            from selenium.webdriver.support.ui import WebDriverWait
-            from selenium.webdriver.support import expected_conditions as EC
-
-            options = webdriver.ChromeOptions()
-            options.add_argument("headless")
-            options.add_experimental_option("prefs", {"download.default_directory": os.getcwd()})
-            global driver
-            driver = webdriver.Chrome(ChromeDriverManager().install(),options=options)
+            print("success {}/{} webp".format(idx+1, len(namelist)))
 
             if os.path.isfile("ezgif.com-gif-maker.gif"):
                 os.remove("ezgif.com-gif-maker.gif")
 
             webp2gif(filename, eid, idx + 1)
 
-            print("success {}/{} GIF".format(idx+1, len(namelist)))
+            print("success {}/{} gif".format(idx+1, len(namelist)))
             
     return eid, ename;
 
@@ -109,7 +109,7 @@ def emoticon_webp(url):
             with open(filename, "wb") as f:
                 f.write(emot)
                 
-            print("success {}/{} WEBP".format(idx+1, len(namelist)))
+            print("success {}/{} webp".format(idx+1, len(namelist)))
             
     return eid, ename;
 
@@ -125,7 +125,7 @@ async def on_ready():
 
 @bot.command()
 async def readme(ctx):
-    await ctx.reply("[~10 sec] !WEBP <Emoticon URL>\n[~10 min] !GIF <Emoticon URL>")
+    await ctx.reply("[~10 sec] !webp <Emoticon URL>\n[~10 min] !gif <Emoticon URL>")
 
 @bot.command()
 async def gif(ctx, url):
