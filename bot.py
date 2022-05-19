@@ -39,7 +39,7 @@ def emoticon(url):
 
     return eid, ename;
 
-TOKEN = 'OTc2NjMwMjk2Mjk4NTQ1MjAz.Gf_XCb.X75AgxYGlcS3f22GWBEV5N30k5maP1nKk7mIXE'
+TOKEN = os.environ.get('TOKEN')
 
 intents = discord.Intents.default()
 bot = Bot(command_prefix='!', intents=intents)
