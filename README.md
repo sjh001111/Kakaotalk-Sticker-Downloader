@@ -1,4 +1,4 @@
-# Kakaotalk-Sticker-Downloader
+# Kakaotalk Emoticon Bot
 
 A Discord bot that downloads and converts KakaoTalk emoticons, supporting both WebP and GIF formats with automatic decryption.
 
